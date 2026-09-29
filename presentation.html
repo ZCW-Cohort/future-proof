@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future-Proof: Personal Notes Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #00283a;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            padding: 4rem;
+            position: relative;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: #3bbe8c;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #47E7AA;
+        }
+
+        p, li {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li::before {
+            content: "▸ ";
+            color: #3bbe8c;
+            font-weight: bold;
+            font-size: 1.8rem;
+            margin-right: 1rem;
+        }
+
+        .highlight {
+            color: #fccf76;
+            font-weight: bold;
+        }
+
+        .emphasis {
+            color: #47E7AA;
+            font-style: italic;
+        }
+
+        .code-block {
+            background: #0A1E25;
+            border-left: 4px solid #3bbe8c;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.3rem;
+            color: #47E7AA;
+        }
+
+        /* Slide-specific backgrounds */
+        .slide-1 {
+            background: linear-gradient(135deg, #00283a 0%, #104d63 100%);
+            color: white;
+        }
+
+        .slide-2, .slide-4, .slide-6, .slide-8, .slide-10 {
+            background: #00283a;
+            color: white;
+        }
+
+        .slide-3, .slide-5, .slide-7, .slide-9 {
+            background: #0A1E25;
+            color: white;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        button {
+            background: #3bbe8c;
+            color: #00283a;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #47E7AA;
+            transform: scale(1.05);
+        }
+
+        button:disabled {
+            background: #166a89;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .logo {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            color: #3bbe8c;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .three-column {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .box {
+            background: #104d63;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-top: 4px solid #3bbe8c;
+        }
+
+        .box h3 {
+            color: #fccf76;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .box p, .box li {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+
+        <!-- Slide 1: Title -->
+        <div class="slide slide-1 active">
+            <div class="logo">ZIP CODE WILMINGTON</div>
+            <div class="slide-number">1/10</div>
+            <h1>Future-Proof</h1>
+            <h2 style="color: #47E7AA;">Personal Notes Manager</h2>
+            <p style="font-size: 2rem; color: #fccf76; margin-top: 2rem;">
+                Building Software That Lasts
+            </p>
+            <p style="font-size: 1.5rem; margin-top: 1rem; opacity: 0.9;">
+                A multi-phase educational project for adult beginners
+            </p>
+        </div>
+
+        <!-- Slide 2: What is Future-Proof Software? -->
+        <div class="slide slide-2">
+            <div class="logo">ZIP CODE WILMINGTON</div>
+            <div class="slide-number">2/10</div>
+            <h2 style="color: #3bbe8c;">What is Future-Proof Software?</h2>
+            <p style="font-size: 1.8rem; margin-bottom: 2rem;">
+                Code designed to remain <span class="highlight">useful, maintainable, and adaptable</span> as technology evolves.
+            </p>
+            <ul>
+                <li>Like building a house with a <span class="emphasis">strong foundation</span></li>
+                <li>Can support renovations and additions years later</li>
+                <li>User needs evolve, new technologies emerge</li>
+                <li>Future-proof code makes change <span class="highlight">easier and less expensive</span></li>
+            </ul>
+        </div>
+
+        <!-- Slide 3: The Problem We're Solving -->
+        <div class="slide slide-3">
+            <div class="logo">ZIP CODE WILMINGTON</div>
+            <div class="slide-number">3/10</div>
+            <h2 style="color: #3bbe8c;">The Problem</h2>
+            <p style="font-size: 1.8rem; margin-bottom: 2rem;">
+                Most note-taking apps today:
+            </p>
+            <ul>
+                <li>Lock your data in <span class="highlight">proprietary formats</span></li>
+                <li>Require specific software that may not exist in 10 years</li>
+                <li>Store data in the cloud (what if the company shuts down?)</li>
+                <li>Don't give you full control of <span class="emphasis">your own notes</span></li>
+            </ul>
+            <p style="font-size: 1.8rem; margin-top: 2rem; color: #47E7AA;">
+                We're building something better.
+            </p>
+        </div>
+
+        <!-- Slide 4: Project Overview -->
+        <div class="slide slide-4">
+            <div class="logo">ZIP CODE WILMINGTON</div>
+            <div class="slide-number">4/10</div>
+            <h2 style="color: #3bbe8c;">Personal Notes Manager</h2>
+            <p style="font-size: 1.8rem; margin-bottom: 2rem;">
+                A text-based note-taking system that stores notes as <span class="highlight">plain UTF-8 text files</span> with YAML metadata.
+            </p>
+            <div class="code-block">
+---<br>
+title: My Example Note<br>
+author: Zip Coder<br>
+tags: [example, documentation]<br>
+---<br>
+<br>
+This is the content of my note.<br>
+It's just plain text!
+            </div>
+            <p style="font-size: 1.5rem; color: #fccf76;">
+                All notes kept in a hidden folder in your HOME directory
+            </p>
+        </div>
+
+        <!-- Slide 5: Why Text Files? -->
+        <div class="slide slide-5">
+            <div class="logo">ZIP CODE WILMINGTON</div>
+            <div class="slide-number">5/10</div>
+            <h2 style="color: #3bbe8c;">Why Text Files?</h2>
+            <ul>
+                <li><span class="highlight">Universal Compatibility</span> - Readable on any OS, any editor</li>
+                <li><span class="highlight">Longevity</span> - Text files have worked for decades, will work for decades more</li>
+                <li><span class="highlight">Version Control Friendly</span> - Works seamlessly with Git</li>
+                <li><span class="highlight">Human Readable</span> - No specialized software needed</li>
+                <li><span class="highlight">You Own Your Data</span> - No cloud dependency</li>
+                <li><span class="highlight">Open Standards</span> - Markdown + YAML</li>
+            </ul>
+        </div>
+
+        <!-- Slide 6: Phase 1 - CLI -->
+        <div class="slide slide-6">
+            <div class="logo">ZIP CODE WILMINGTON</div>
+            <div class="slide-number">6/10</div>
+            <h2 style="color: #3bbe8c;">Phase 1: Command Line Interface</h2>
+            <p style="font-size: 1.6rem; margin-bottom: 1.5rem;">
+                Build a CLI tool to manage your notes from the terminal:
+            </p>
+            <div class="code-block" style="font-size: 1.2rem;">
+notes create          # Create a new note<br>
+notes list            # List all notes<br>
+notes read &lt;id&gt;       # Display a note<br>
+notes edit &lt;id&gt;       # Edit a note<br>
+notes delete &lt;id&gt;     # Delete a note<br>
+notes search "query"  # Search notes<br>
+notes stats           # Show statistics
+            </div>
+            <p style="color: #fccf76; font-size: 1.4rem;">
+                Learn: File I/O, YAML parsing, command-line arguments, testing
+            </p>
+        </div>
+
+        <!-- Slide 7: Phase 2 - REST Server -->
+        <div class="slide slide-7">
+            <div class="logo">ZIP CODE WILMINGTON</div>
+            <div class="slide-number">7/10</div>
+            <h2 style="color: #3bbe8c;">Phase 2: REST Server + Web Frontend</h2>
+            <div class="three-column">
+                <div class="box">
+                    <h3>REST API</h3>
+                    <ul style="font-size: 1.1rem;">
+                        <li style="font-size: 1.1rem;">GET /api/notes</li>
+                        <li style="font-size: 1.1rem;">POST /api/notes</li>
+                        <li style="font-size: 1.1rem;">PUT /api/notes/:id</li>
+                        <li style="font-size: 1.1rem;">DELETE /api/notes/:id</li>
+                    </ul>
+                </div>
+                <div class="box">
+                    <h3>Web Interface</h3>
+                    <ul style="font-size: 1.1rem;">
+                        <li style="font-size: 1.1rem;">Access from browser</li>
+                        <li style="font-size: 1.1rem;">Mobile-responsive</li>
+                        <li style="font-size: 1.1rem;">Vanilla JavaScript</li>
+                    </ul>
+                </div>
+                <div class="box">
+                    <h3>Bonus</h3>
+                    <ul style="font-size: 1.1rem;">
+                        <li style="font-size: 1.1rem;">Dataset support (CSV/JSON)</li>
+                        <li style="font-size: 1.1rem;">S3 backup</li>
+                        <li style="font-size: 1.1rem;">Authentication</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="color: #47E7AA; font-size: 1.3rem; margin-top: 2rem;">
+                Learn: Client-server architecture, REST APIs, web development
+            </p>
+        </div>
+
+        <!-- Slide 8: Phase 3 - GUI -->
+        <div class="slide slide-8">
+            <div class="logo">ZIP CODE WILMINGTON</div>
+            <div class="slide-number">8/10</div>
+            <h2 style="color: #3bbe8c;">Phase 3: Graphical User Interface</h2>
+            <ul>
+                <li>Rich text editor with <span class="highlight">markdown support</span></li>
+                <li>Real-time preview of your notes</li>
+                <li>Visual organization (folders/tags)</li>
+                <li>Enhanced search with highlighting</li>
+                <li>Dark/light theme options</li>
+                <li>Export to PDF, HTML, and more</li>
+            </ul>
+            <p style="font-size: 1.6rem; margin-top: 2rem; color: #fccf76;">
+                Same text files, better interface!
+            </p>
+        </div>
+
+        <!-- Slide 9: Learning Objectives -->
+        <div class="slide slide-9">
+            <div class="logo">ZIP CODE WILMINGTON</div>
+            <div class="slide-number">9/10</div>
+            <h2 style="color: #3bbe8c;">What You'll Learn</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem;">
+                <div>
+                    <h3 style="color: #fccf76;">Core Skills</h3>
+                    <ul>
+                        <li>File I/O operations</li>
+                        <li>Data parsing (YAML, JSON)</li>
+                        <li>Command-line processing</li>
+                        <li>Test-Driven Development</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: #fccf76;">Advanced Topics</h3>
+                    <ul>
+                        <li>REST API development</li>
+                        <li>Frontend-backend integration</li>
+                        <li>User interface design</li>
+                        <li>Progressive enhancement</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="font-size: 1.5rem; margin-top: 2rem; color: #47E7AA;">
+                Build skills that transfer to ANY programming project!
+            </p>
+        </div>
+
+        <!-- Slide 10: Getting Started -->
+        <div class="slide slide-10">
+            <div class="logo">ZIP CODE WILMINGTON</div>
+            <div class="slide-number">10/10</div>
+            <h2 style="color: #3bbe8c;">Ready to Get Started?</h2>
+            <div class="box" style="background: #104d63; padding: 2rem; margin: 2rem 0;">
+                <h3 style="color: #fccf76; font-size: 2rem;">Prerequisites</h3>
+                <ul>
+                    <li>Java 11+ OR Python 3.11+</li>
+                    <li>Text editor (VS Code recommended)</li>
+                    <li>Git for version control</li>
+                    <li>Enthusiasm to learn!</li>
+                </ul>
+            </div>
+            <p style="font-size: 1.8rem; color: #47E7AA; margin-top: 2rem;">
+                Choose your own project name and fork the repo
+            </p>
+            <p style="font-size: 1.4rem; margin-top: 1rem;">
+                Suggested names: <span class="highlight">NoteNexus, MindScribe, ThoughtVault, NoteCraft</span>
+            </p>
+            <p style="font-size: 2rem; margin-top: 3rem; text-align: center; color: #3bbe8c;">
+                Let's build software that lasts! 🚀
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+        <button id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+        <button id="nextBtn" onclick="changeSlide(1)">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+
+            // Update button states
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === slides.length - 1;
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && currentSlide < slides.length - 1) {
+                changeSlide(1);
+            } else if (e.key === 'ArrowLeft' && currentSlide > 0) {
+                changeSlide(-1);
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
